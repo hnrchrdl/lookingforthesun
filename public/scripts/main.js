@@ -2,7 +2,7 @@
 
 (function() {
     var isSlided = false;
-    var ws = new WebSocket("ws://websocket-service.herokuapp.com/");
+    var ws = new WebSocket("wss://websocket-service.herokuapp.com/");
     ws.onmessage = function(msg) {
         var txt = JSON.parse(msg.data).message;
         updateMsg(txt);
