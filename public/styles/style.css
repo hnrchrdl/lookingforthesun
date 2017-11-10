@@ -28,7 +28,6 @@ body, html {
 .cover.good {
   background-color: #46bdc7;
   color: #f9e900;
-  fill: #f9e900;
 }
 .headline-container {
   position: absolute;
@@ -140,13 +139,11 @@ body, html {
   position: absolute;
   right: 0;
   bottom: 0;
-  padding: 10px;
+  padding: 15px;
   font-size: 30pt;
   letter-spacing: 1px;
 }
 .inline-svg {
-  height: 25pt;
+  height: 30pt;
+  transform: translateX(-5px) translateY(7px);
 }
-​path {
-  fill: blue;
-}​
