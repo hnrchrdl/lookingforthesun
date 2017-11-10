@@ -16,6 +16,11 @@ a {
   right: 0;
   background-color: #f9bfc7;
   text-align: center;
+  overflow: hidden;
+  transition: all 1s ease;
+}
+.cover.news {
+  background-color: #f9e900;
 }
 .headline-container {
   position: absolute;
@@ -24,7 +29,7 @@ a {
   left: 0;
   right: 0;
   transform: translateY(-50%);
-
+  transition: all 1s ease;
 }
 .headline {
   font-weight: 900;
@@ -36,6 +41,7 @@ a {
   height: 600px;
   margin: auto;
   margin-top: -320px;
+  transition: all 1s ease;
 }
 .bigsun {
   animation:spin 10s linear infinite;
@@ -48,16 +54,62 @@ a {
   width: 400px;
   text-align: center;
   margin: auto;
-  
   transform: translateY(10px);
+  transition: all 1s ease;
 }
 .sunny-man {
   width: 333px;
-  
 }
 @keyframes spin { 
   100% { 
     -webkit-transform: rotate(360deg); 
     transform:rotate(360deg);
   }
+}
+.good-news-container {
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  left: 0;
+  right: 0;
+  
+  transform: translateY(0);
+  transition: all 1s ease;
+  opacity: 0;
+  /* width: 100%; */
+}
+.good-news-text {
+  padding: 100px;
+  font-weight: 700;
+  font-size: 30pt;
+  color: #ef6b59;
+  transition: all 1s ease;
+}
+
+.text-invers {
+  color: #f9e900;
+  background-color: #ef6b59;
+  transition: all 1s ease;
+}
+
+.fade-in-up {
+  transform: translateY(0);
+  opacity: 1;
+}
+.good-news-container.fade-in-up {
+  transform: translateY(-50%);
+}
+.fade-out-up {
+  opacity: 0;
+  transform: translateY(-100px);
+}
+.good-news-container.fade-out-up {
+  transform: translateY(-80%);
+}
+.fade-out-down {
+  opacity: 0;
+  transform: translateY(100px); 
+}
+.fade-out {
+  opacity: 0;
 }
