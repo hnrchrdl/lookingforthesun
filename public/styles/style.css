@@ -1,8 +1,63 @@
-body {
+body, html {
+  font-family: 'Roboto', sans-serif;
   padding: 50px;
   font: 14px sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+.cover {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #f9bfc7;
+  text-align: center;
+}
+.headline-container {
+  position: absolute;
+  text-align: center;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+
+}
+.headline {
+  font-weight: 900;
+  font-size: 80pt;
+  color: #ef6b59;
+}
+.bigsun-container {
+  width: 600px;
+  height: 600px;
+  margin: auto;
+  margin-top: -320px;
+}
+.bigsun {
+  animation:spin 10s linear infinite;
+}
+.sunny-man-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 400px;
+  text-align: center;
+  margin: auto;
+  
+  transform: translateY(10px);
+}
+.sunny-man {
+  width: 333px;
+  
+}
+@keyframes spin { 
+  100% { 
+    -webkit-transform: rotate(360deg); 
+    transform:rotate(360deg);
+  }
 }
