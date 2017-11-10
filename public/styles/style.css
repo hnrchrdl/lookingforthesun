@@ -1,11 +1,8 @@
 body, html {
   font-family: 'Roboto', sans-serif;
+  font-weight: 700;
   padding: 50px;
   font: 14px sans-serif;
-}
-
-a {
-  color: #00B7FF;
 }
 
 .cover {
@@ -14,13 +11,24 @@ a {
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: #f9bfc7;
   text-align: center;
   overflow: hidden;
   transition: all 1s ease;
 }
 .cover.news {
   background-color: #f9e900;
+  color: #ef6b59;
+  fill: #ef6b59;
+}
+.cover.bad {
+  background-color: #f9bfc7;
+  color: #ef6b59;
+  fill: #ef6b59;
+}
+.cover.good {
+  background-color: #46bdc7;
+  color: #f9e900;
+  fill: #f9e900;
 }
 .headline-container {
   position: absolute;
@@ -34,7 +42,6 @@ a {
 .headline {
   font-weight: 900;
   font-size: 80pt;
-  color: #ef6b59;
 }
 .bigsun-container {
   width: 600px;
@@ -45,6 +52,21 @@ a {
 }
 .bigsun {
   animation:spin 10s linear infinite;
+}
+.sun-small {
+  animation:spin2 5s linear infinite;
+}
+@keyframes spin { 
+  100% { 
+    -webkit-transform: rotate(360deg); 
+    transform:rotate(360deg);
+  }
+}
+@keyframes spin2 { 
+  100% { 
+    -webkit-transform: rotate(360deg); 
+    transform:rotate(360deg);
+  }
 }
 .sunny-man-container {
   position: absolute;
@@ -60,12 +82,7 @@ a {
 .sunny-man {
   width: 333px;
 }
-@keyframes spin { 
-  100% { 
-    -webkit-transform: rotate(360deg); 
-    transform:rotate(360deg);
-  }
-}
+
 .good-news-container {
   position: absolute;
   text-align: center;
@@ -81,8 +98,7 @@ a {
 .good-news-text {
   padding: 100px;
   font-weight: 700;
-  font-size: 30pt;
-  color: #ef6b59;
+  font-size: 50pt;
   transition: all 1s ease;
 }
 
@@ -113,3 +129,24 @@ a {
 .fade-out {
   opacity: 0;
 }
+.sun-small {
+  width: 60pt;
+}
+
+.hide {
+  display: none;
+}
+.credit {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 10px;
+  font-size: 30pt;
+  letter-spacing: 1px;
+}
+.inline-svg {
+  height: 25pt;
+}
+​path {
+  fill: blue;
+}​

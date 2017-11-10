@@ -2,15 +2,18 @@ extends layout
 
 block content
   
-  div(id="covernews" class="cover news")
+  div(id="covernews" class="cover news hide")
     div(id="good-news-container" class="good-news-container")
       div(id="good-news-msg" class="good-news-text")
-  div(id="coverbadwheather" class="cover")
+    div(class="credit") <span><object class="inline-svg" data="/images/twitter.svg" type="image/svg+xml"></object></span> #lookingforthesun
+  div(id="coverweather" class="cover good hide")
     div(id="bigsun" class="bigsun-container")
       <object class="bigsun" data="/images/big_sun.svg" type="image/svg+xml">
       </object>
+    div(class="credit") <span><object class="inline-svg" data="/images/twitter.svg" type="image/svg+xml"></object></span> #lookingforthesun
     div(id="headline" class='headline-container')
-      div(class="headline") LOOKING FOR THE SUN?
+      div(id="headline-text" class="headline")
     div(id="sunny-man" class="sunny-man-container")
       <object class="sunny-man" data="/images/sunny_man.svg" type="image/svg+xml">
       </object>
+    
