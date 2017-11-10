@@ -1,4 +1,8 @@
 (function() {
+    
+    var console = window.console;
+    var document = window.document;
+
     var goodWeather = false;
     var ws = new WebSocket("wss://websocket-service.herokuapp.com/");
     ws.onmessage = function(msg) {
@@ -6,11 +10,9 @@
         console.log(msg)
 
         var msgObj = JSON.parse(msg.data);
+        var text = parseServerMsg(msgObj);
         
-        var txt = msgObj.message;
-        // var score = msgObj.score;
-        updateMsg(txt);
-        // updateMsg(txt + score ? " " + score.toString(): "");
+        updateMsg(text);
     }
     window.onload = function(){
 
@@ -45,21 +47,19 @@
         var cover2 = document.getElementById("covernews");
         cover2.classList.remove("hide")
         
-
+        var COVER_LENGTH = 5000;
+        var UPDATE_INTERVAL = 15000;
         setTimeout(function() {
-            
+            // start after 5 sec
             startMessages();
 
             setInterval(function(){
-                console.log('stop')
                  stopMessages();
                  setTimeout(function() {
-                    console.log('start')
                     startMessages();
-                 }, 5000);
-            }, 15000);
-
-        }, 5000)
+                 }, COVER_LENGTH);
+            }, UPDATE_INTERVAL);
+        }, COVER_LENGTH)
 
         
     }
@@ -104,6 +104,15 @@
         gn.className += " fade-in-up";
     };
 
+    var parseServerMsg = function(msgObj) {
+        var txt = msgObj.message;
+        var score = msgObj.score;
+        if(score) {
+            txt += " " + score.toString();
+        }
+        return txt;
+    }
+
     var updateMsg = function(txt) {
         console.log(txt)
         txt ='Here\'s some <span class="text-invers">sunny news</span>: </br>' + txt;
@@ -139,9 +148,6 @@
             newGn.className += " fade-in-up";
         }, 200)
         
-        // console.log(newGn);
-        
-        
     }
-    })()
+})()
 
