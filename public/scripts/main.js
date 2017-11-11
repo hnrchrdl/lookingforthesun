@@ -204,16 +204,16 @@
     }
 
     var scoreToRating = function(score) {
-        if (score > .8) {
+        if (score > .9) {
             return 5;
         }
-        if(score > .6) {
+        if(score > .7) {
             return 4;
         }
-        if(score > .6) {
+        if(score > .5) {
             return 3;
         }
-        if(score > .4) {
+        if(score > .3) {
             return 2;
         }
         return 1;
