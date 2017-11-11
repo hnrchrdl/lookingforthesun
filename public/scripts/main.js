@@ -42,8 +42,8 @@
         // set headline text
         var headline = document.getElementById("headline-text");
         headline.innerHTML = goodWeather ?
-        'TODAY IS SUNNY <span><object class="sun-small" data="/images/small_sun.svg" type="image/svg+xml"></object></span> JUST GO ENJOY HAMBURG!':
-        "LOOKING FOR THE SUN?";
+            'TODAY IS SUNNY <span><object class="sun-small" data="/images/small_sun.svg" type="image/svg+xml"></object></span> JUST GO ENJOY HAMBURG!':
+            "LOOKING FOR THE SUN?";
         
         // initialize
         cover.classList.remove("hide");
@@ -141,14 +141,53 @@
 
     var parseServerMsg = function(msgObj) {
         if (msgObj) {
-            var txt = msgObj.message;
-            var score = msgObj.score;
-            if(score) {
-                txt += " " + score.toString();
+            var message = msgObj.message || "";
+            var txt = '<div>' + message + '</div>';
+            
+            var score = msgObj.score || .5
+            var author = msgObj.author || '@dummy';
+
+            if(author && typeof score === 'number') {
+                var countSuns = scoreToRating(score);
+                var rating = createRating(countSuns);
+                var credit = '<div class="message-credit">Thank you ' + author + ' for making Hamburg ' + rating + ' brighter!</div>';
+                txt += credit;
             }
             return txt;
         }
         return ":)";
+    }
+
+    var createRating = function(score) {
+        console.log(score)
+        var max = 5;
+        var active = '<span><object class="rating-sun" data="/images/sun_star_active.svg" type="image/svg+xml"></object></span>';
+        var inactive = '<span><object class="rating-sun" data="/images/sun_star_inactive.svg" type="image/svg+xml"></object></span>';
+        var ratings = [];
+        while(max-- > 0) {
+            if(score > max) {
+                ratings.push(active);
+            } else {
+               ratings.push(inactive); 
+            }
+        }
+        return ratings.reverse().join(' ');
+    }
+
+    var scoreToRating = function(score) {
+        if (score > .8) {
+            return 5;
+        }
+        if(score > .6) {
+            return 4;
+        }
+        if(score > .6) {
+            return 3;
+        }
+        if(score > .4) {
+            return 2;
+        }
+        return 1;
     }
 
     var updateMsg = function(txt) {

@@ -100,6 +100,9 @@ body, html {
   font-size: 50pt;
   transition: all .7s ease;
 }
+.message-credit {
+  font-size: 20pt;
+}
 
 .text-invers {
   color: #f9e900;
@@ -146,4 +149,9 @@ body, html {
 .inline-svg {
   height: 30pt;
   transform: translateX(0) translateY(8px);
+}
+
+.rating-sun {
+  height: 20pt;
+  transform: translateX(0) translateY(5px);
 }
