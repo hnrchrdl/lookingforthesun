@@ -164,9 +164,18 @@
             var message = msgObj.message || "";
             var txt = '<div>' + message + '</div>';
             
-            var score = msgObj.score || 0
+            var score;
+            try {
+                score = parseFloat(msgObj.score);
+            }
+            catch(e) {
+                score = .9;
+            }
+            if(isNaN(score)) {
+                score = .9;
+            }
+            
             var author = msgObj.author || 'NMA';
-
             if(author && typeof score === 'number') {
                 var countSuns = scoreToRating(score);
                 var rating = createRating(countSuns);
