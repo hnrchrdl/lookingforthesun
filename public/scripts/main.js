@@ -97,6 +97,7 @@
     }
 
     
+    var lastMsg;
 
     var updateMessage = function() {
         var msgObj = msgBuffer.shift();
@@ -104,7 +105,7 @@
         if(lastMsg !== text) {
             updateMsg(text);
         }
-        var lastMsg = text;
+        lastMsg = text;
     }
 
     var startMessages = function() {
@@ -188,7 +189,7 @@
     }
 
     var createRating = function(score) {
-        console.log(score)
+
         var max = 5;
         var active = '<span><object class="rating-sun" data="/images/sun_star_active.svg" type="image/svg+xml"></object></span>';
         var inactive = '<span><object class="rating-sun" data="/images/sun_star_inactive.svg" type="image/svg+xml"></object></span>';
@@ -220,7 +221,7 @@
     }
 
     var updateMsg = function(txt) {
-        console.log(txt)
+
         txt ='Here\'s some <span class="text-invers">sunny news</span>: </br>' + txt;
         
         var gnc = document.getElementsByClassName("good-news-container");
