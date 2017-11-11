@@ -8,17 +8,36 @@
     var msgBuffer = [];
 
     var canUpdate = false;
-
-    var ws = new WebSocket("wss://websocket-service.herokuapp.com/");
-    ws.onmessage = function(msg) {
-        
-        console.log(msg)
-        try {
-            msgBuffer.push(JSON.parse(msg.data));
-        } catch(e) {}
-        
+    var ws
+    var connect = function() {
+        var ws = new WebSocket("wss://websocket-service.herokuapp.com/");
+        ws.onmessage = function(msg) {
+            
+            console.log(msg)
+            try {
+                msgBuffer.push(JSON.parse(msg.data));
+            } catch(e) {}
+            
+        }
+        ws.onclose = function() {
+            console.log('websocket close');
+            connect();
+        }
+        ws.onerror = function() {
+            console.log('websocket error');
+            connect();
+        }
     }
+
+    connect();
+
+    
+    
     window.onload = function(){
+
+        document.onclick = function() {
+            console.log('click');
+        }
 
         var urlParams = new URLSearchParams(window.location.search);
         goodWeather = urlParams.has("weather") ? 
@@ -58,10 +77,8 @@
             // start after 5 sec
             startMessages();
             setInterval(function(){
-                canUpdate = false;
                 stopMessages();
                 setTimeout(function() {
-                    
                     startMessages();
                 }, COVER_LENGTH);
             }, UPDATE_INTERVAL);
@@ -84,7 +101,10 @@
     var updateMessage = function() {
         var msgObj = msgBuffer.shift();
         var text = parseServerMsg(msgObj);
-        updateMsg(text);
+        if(lastMsg !== text) {
+            updateMsg(text);
+        }
+        var lastMsg = text;
     }
 
     var startMessages = function() {
@@ -144,8 +164,8 @@
             var message = msgObj.message || "";
             var txt = '<div>' + message + '</div>';
             
-            var score = msgObj.score || .5
-            var author = msgObj.author || '@dummy';
+            var score = msgObj.score || 0
+            var author = msgObj.author || 'NMA';
 
             if(author && typeof score === 'number') {
                 var countSuns = scoreToRating(score);
