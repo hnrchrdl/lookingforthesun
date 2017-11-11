@@ -145,5 +145,5 @@ body, html {
 }
 .inline-svg {
   height: 30pt;
-  transform: translateX(-5px) translateY(7px);
+  transform: translateX(0) translateY(8px);
 }
