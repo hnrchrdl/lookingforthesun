@@ -13,7 +13,7 @@ body, html {
   right: 0;
   text-align: center;
   overflow: hidden;
-  transition: all 1s ease;
+  transition: all .7s ease;
 }
 .cover.news {
   background-color: #f9e900;
@@ -36,7 +36,7 @@ body, html {
   left: 0;
   right: 0;
   transform: translateY(-50%);
-  transition: all 1s ease;
+  transition: all .7s ease;
 }
 .headline {
   font-weight: 900;
@@ -47,10 +47,10 @@ body, html {
   height: 600px;
   margin: auto;
   margin-top: -320px;
-  transition: all 1s ease;
+  transition: all .7s ease;
 }
 .bigsun {
-  animation:spin 10s linear infinite;
+  animation:spin 15s linear infinite;
 }
 .sun-small {
   animation:spin2 5s linear infinite;
@@ -76,7 +76,7 @@ body, html {
   text-align: center;
   margin: auto;
   transform: translateY(10px);
-  transition: all 1s ease;
+  transition: all .7s ease;
 }
 .sunny-man {
   width: 333px;
@@ -90,7 +90,7 @@ body, html {
   right: 0;
   
   transform: translateY(0);
-  transition: all 1s ease;
+  transition: all .7s ease;;
   opacity: 0;
   /* width: 100%; */
 }
@@ -98,13 +98,13 @@ body, html {
   padding: 100px;
   font-weight: 700;
   font-size: 50pt;
-  transition: all 1s ease;
+  transition: all .7s ease;
 }
 
 .text-invers {
   color: #f9e900;
   background-color: #ef6b59;
-  transition: all 1s ease;
+  transition: all .7s ease;
 }
 
 .fade-in-up {

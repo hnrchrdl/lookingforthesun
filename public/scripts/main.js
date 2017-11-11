@@ -4,15 +4,19 @@
     var document = window.document;
 
     var goodWeather = false;
+
+    var msgBuffer = [];
+
+    var canUpdate = false;
+
     var ws = new WebSocket("wss://websocket-service.herokuapp.com/");
     ws.onmessage = function(msg) {
         
         console.log(msg)
-
-        var msgObj = JSON.parse(msg.data);
-        var text = parseServerMsg(msgObj);
+        try {
+            msgBuffer.push(JSON.parse(msg.data));
+        } catch(e) {}
         
-        updateMsg(text);
     }
     window.onload = function(){
 
@@ -30,7 +34,6 @@
             if (goodWeather) {
                 var sun = document.getElementById("bigsun");
                 sun.className += " hide";
-    
                 var man = document.getElementById("sunny-man");
                 man.className += " hide"
             }
@@ -47,30 +50,59 @@
         var cover2 = document.getElementById("covernews");
         cover2.classList.remove("hide")
         
+        // set intervals
         var COVER_LENGTH = 5000;
-        var UPDATE_INTERVAL = 15000;
+        var UPDATE_INTERVAL = 20000;
+        
         setTimeout(function() {
             // start after 5 sec
             startMessages();
-
             setInterval(function(){
-                 stopMessages();
-                 setTimeout(function() {
+                canUpdate = false;
+                stopMessages();
+                setTimeout(function() {
+                    
                     startMessages();
-                 }, COVER_LENGTH);
+                }, COVER_LENGTH);
             }, UPDATE_INTERVAL);
-        }, COVER_LENGTH)
 
-        
+            updateMessage();
+
+            var MIN_MESSAGE_LENGTH = 5000;
+            setInterval(function() {
+                console.log(msgBuffer, canUpdate)
+                if(msgBuffer.length > 0 && canUpdate) {
+                    updateMessage();
+                }
+            }, MIN_MESSAGE_LENGTH);
+            
+        }, COVER_LENGTH)    
+    }
+
+    
+
+    var updateMessage = function() {
+        var msgObj = msgBuffer.shift();
+        var text = parseServerMsg(msgObj);
+        updateMsg(text);
     }
 
     var startMessages = function() {
 
-        var cover = document.getElementById("coverweather")
-        cover.className += " fade-out"
+        canUpdate = true;
 
-        var headline = document.getElementById("headline");
-        headline.className += " fade-out-up";
+        setTimeout(function() {
+
+            var cover = document.getElementById("coverweather")
+            cover.className += " fade-out"
+    
+            var headline = document.getElementById("headline");
+            headline.className += " fade-out-up";
+
+            var gn = document.getElementById('good-news-container');
+            gn.className += " fade-in-up";
+            
+        }, 200)
 
         if (!goodWeather) {
             var sun = document.getElementById("bigsun");
@@ -79,13 +111,12 @@
             var man = document.getElementById("sunny-man");
             man.className += " fade-out-down"
         }
-
-        var gn = document.getElementById('good-news-container');
-        gn.className += " fade-in-up";
-
     }
 
     var stopMessages = function() {
+
+        canUpdate = false;
+
         var cover = document.getElementById("coverweather");
             cover.classList.remove("fade-out");
             
@@ -93,11 +124,15 @@
         headline.classList.remove("fade-out-up");
         
         if (!goodWeather) {
-            var sun = document.getElementById("bigsun");
-            sun.classList.remove("fade-out-up");
-    
-            var man = document.getElementById("sunny-man");
-            man.classList.remove("fade-out-down");
+
+            setTimeout(function() {
+
+                var sun = document.getElementById("bigsun");
+                sun.classList.remove("fade-out-up");
+        
+                var man = document.getElementById("sunny-man");
+                man.classList.remove("fade-out-down");
+            }, 200)
         }
 
         var gn = document.getElementById('good-news-container');
@@ -105,12 +140,15 @@
     };
 
     var parseServerMsg = function(msgObj) {
-        var txt = msgObj.message;
-        var score = msgObj.score;
-        if(score) {
-            txt += " " + score.toString();
+        if (msgObj) {
+            var txt = msgObj.message;
+            var score = msgObj.score;
+            if(score) {
+                txt += " " + score.toString();
+            }
+            return txt;
         }
-        return txt;
+        return ":)";
     }
 
     var updateMsg = function(txt) {
@@ -124,9 +162,6 @@
             (function(item) {
                 setTimeout(function() {
                     item.remove();
-                    // if(gn) {
-                    //     gn.remove();
-                    // }
                 }, 1000);
             })(gnc[i]);
         }
